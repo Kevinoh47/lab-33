@@ -11,13 +11,33 @@
 
 
 ### Modules
+
+#### `if.js`
+##### Exported Values and Methods
+
+#### `list.js`
+##### Exported Values and Methods
+
+#### `modal.js`
+##### Exported Values and Methods
+
+#### `person.js`
+##### Exported Values and Methods
+
+
 #### `thunk.js`
 ##### Exported Values and Methods
 The /src/store/middleware/thunk.js exports a curried function which calls the store, then next, then action, before testing that action to see whether or not the action is itself a function. If it is, thunk calls that function with store.dispatch() and store.getState() functions as input parameters. 
 
 By injecting this code between the invocation of the action and the action itself, asyncronous calls such as API calls can be made and managed before the action executes and returns.  
 
-#### `actions.js`
+#### `people-actions.js`
+##### Exported Values and Methods
+The /src/store/actions.js file exports a get function which takes a url, dispatches it to the store (via thunk I believe), and then runs the utis.fetchData(url) function, which returns a promise. 
+
+With the data returned from the async call, a further, internal function called runAsyncGetAction is called to run the action, ultimately returning an object with type of action (e.g., "GET") and the payload.
+
+#### `person-actions.js`
 ##### Exported Values and Methods
 The /src/store/actions.js file exports a get function which takes a url, dispatches it to the store (via thunk I believe), and then runs the utis.fetchData(url) function, which returns a promise. 
 
@@ -28,7 +48,11 @@ With the data returned from the async call, a further, internal function called 
 The /src/store/index.js file builds the Redux store and exports the createStore function.
 
 
-#### `reducers.js`
+#### `people-reducers.js`
+##### Exported Values and Methods
+The /src/store/reducers.js file exports a function which manages state by checking the type of action expected, and returns what is expected of that action. In our case we are switching between a "GET" action which returns the payload, and a default action which just returns state.
+
+#### `person-reducers.js`
 ##### Exported Values and Methods
 The /src/store/reducers.js file exports a function which manages state by checking the type of action expected, and returns what is expected of that action. In our case we are switching between a "GET" action which returns the payload, and a default action which just returns state.
 
